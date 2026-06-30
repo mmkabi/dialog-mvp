@@ -1,7 +1,7 @@
-import { ArrowRight, BookOpen, BriefcaseBusiness, HeartPulse, MessageCircle, Mic2, Radio, UsersRound } from "lucide-react";
+import { ArrowRight, BookOpen, BriefcaseBusiness, HeartPulse, MessageCircle, Mic2, UsersRound } from "lucide-react";
 import Image from "next/image";
 
-import { Badge, ButtonLink, Card, PageSection, SectionHeader, TrustBadge, WaveformPlayer } from "@/components/ui/primitives";
+import { Badge, ButtonLink, Card, PageSection, SectionHeader, TrustBadge } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 
 export default async function LandingPage({ params }: { params: Promise<{ lang: string }> }) {
@@ -14,21 +14,20 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
     { href: `${base}/casting`, label: dictionary.nav.casting, icon: <BriefcaseBusiness className="h-5 w-5" /> },
     { href: `${base}/speech`, label: dictionary.nav.speech, icon: <Mic2 className="h-5 w-5" /> },
     { href: `${base}/children`, label: dictionary.nav.children, icon: <HeartPulse className="h-5 w-5" /> },
-    { href: `${base}/actors`, label: dictionary.skills.dubbing, icon: <Radio className="h-5 w-5" /> },
   ];
 
   return (
     <>
-      <section className="stage-vignette relative min-h-[86vh] overflow-hidden text-white">
+      <section className="stage-vignette relative min-h-[86vh] overflow-hidden text-[var(--foreground)]">
         <Image
-          src="/images/dialog-stage-hero.png"
+          src="/images/dialog-stage-hero-light.png"
           alt={dictionary.brand.tagline}
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-[0.42] mix-blend-screen"
+          className="hero-bg-image object-cover opacity-[0.78]"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_8%,rgba(245,192,92,0.34),transparent_28rem),linear-gradient(180deg,rgba(13,11,10,0.18),rgba(13,11,10,0.92)_80%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_45%_8%,rgba(245,192,92,0.18),transparent_28rem),linear-gradient(180deg,rgba(255,248,234,0.08),rgba(246,239,227,0.72)_86%)]" />
         <div className="relative mx-auto grid min-h-[86vh] max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8">
           <div className="reveal-up max-w-3xl drop-shadow-sm">
             <div className="flex flex-wrap items-center gap-3">
@@ -36,7 +35,7 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
               <TrustBadge>{dictionary.language.current}</TrustBadge>
             </div>
             <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl">{dictionary.landing.title}</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-9 text-white/82">{dictionary.landing.subtitle}</p>
+            <p className="mt-6 max-w-2xl text-lg leading-9 text-[var(--text-muted)]">{dictionary.landing.subtitle}</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={`${base}/dashboard`} icon={<ArrowRight className="h-4 w-4" />}>
                 {dictionary.landing.primaryCta}
@@ -47,20 +46,19 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
             </div>
           </div>
           <div className="reveal-up hidden lg:block">
-            <div className="paper-grain rounded-[2rem] border border-white/12 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur">
-              <div className="rounded-[1.5rem] border border-[var(--accent)]/25 bg-[var(--stage-black)]/88 p-5">
+            <div className="paper-grain rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface-paper)]/80 p-5 shadow-2xl shadow-[rgb(100_70_30_/_12%)] backdrop-blur">
+              <div className="rounded-[1.5rem] border border-[var(--accent)]/25 bg-[var(--surface-raised)] p-5">
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-sm font-semibold text-[var(--accent-soft)]">{dictionary.nav.actors}</p>
-                    <p className="mt-1 text-2xl font-semibold">{dictionary.skills.voiceActing}</p>
+                    <p className="text-sm font-semibold text-[var(--primary)]">{dictionary.brand.shortName}</p>
+                    <p className="mt-1 text-2xl font-semibold">{dictionary.landing.moduleTitle}</p>
                   </div>
-                  <Badge tone="warm">{dictionary.skills.dubbing}</Badge>
+                  <Badge tone="warm">{dictionary.nav.education}</Badge>
                 </div>
-                <WaveformPlayer label={dictionary.common.voiceType} />
-                <div className="mt-5 grid grid-cols-3 gap-3 text-center text-sm text-white/70">
-                  <div className="rounded-2xl bg-white/8 p-3">{dictionary.nav.casting}</div>
-                  <div className="rounded-2xl bg-white/8 p-3">{dictionary.nav.practice}</div>
-                  <div className="rounded-2xl bg-white/8 p-3">{dictionary.nav.education}</div>
+                <div className="mt-5 grid grid-cols-3 gap-3 text-center text-sm text-[var(--text-muted)]">
+                  <div className="rounded-2xl bg-[var(--surface-warm)] p-3">{dictionary.nav.casting}</div>
+                  <div className="rounded-2xl bg-[var(--surface-warm)] p-3">{dictionary.nav.practice}</div>
+                  <div className="rounded-2xl bg-[var(--surface-warm)] p-3">{dictionary.nav.education}</div>
                 </div>
               </div>
             </div>
@@ -74,7 +72,7 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {modules.map((module) => (
             <Card key={`${module.href}-${module.label}`} as="article" className="min-h-44">
-              <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-[var(--stage-black)] text-[var(--accent-soft)] shadow-inner">
+              <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-[var(--accent-soft)] text-[var(--primary)] shadow-inner">
                 {module.icon}
               </div>
               <h2 className="text-lg font-semibold text-[var(--foreground)]">{module.label}</h2>

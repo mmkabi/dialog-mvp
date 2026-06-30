@@ -40,7 +40,6 @@ export default async function PracticeRequestDetailPage({
             <InfoRow label={dictionary.practice.roleNeeded} value={l(request.roleNeeded, locale)} />
             <InfoRow label={dictionary.practice.preferredGender} value={dictionary.genders[request.preferredGender]} />
             <InfoRow label={dictionary.practice.approximateAge} value={request.approximateAge} />
-            <InfoRow label={dictionary.common.voiceType} value={l(request.voiceType, locale)} />
             <InfoRow label={dictionary.practice.cityOrOnline} value={l(request.cityOrOnline, locale)} />
             <InfoRow label={dictionary.practice.proposedTime} value={l(request.proposedTime, locale)} />
           </dl>

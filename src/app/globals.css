@@ -3,9 +3,9 @@
 :root {
   --background: #f6efe3;
   --foreground: #191512;
-  --stage-black: #0d0b0a;
-  --stage-ink: #171312;
-  --stage-graphite: #2c2522;
+  --stage-black: #fff7e8;
+  --stage-ink: #f2e4cd;
+  --stage-graphite: #d9c3a3;
   --surface-paper: #fff8ea;
   --surface-warm: #f8eddc;
   --surface-raised: #fffaf0;
@@ -37,7 +37,7 @@ body {
   background:
     radial-gradient(circle at 18% -10%, rgb(212 154 42 / 20%), transparent 34rem),
     radial-gradient(circle at 92% 8%, rgb(104 25 36 / 16%), transparent 30rem),
-    linear-gradient(180deg, #15110f 0, #15110f 18rem, var(--background) 18rem);
+    linear-gradient(180deg, #fff6e7 0, #fff6e7 18rem, var(--background) 18rem);
   color: var(--foreground);
   font-family: "Manrope", "Inter", Arial, Helvetica, sans-serif;
   min-height: 100vh;
@@ -67,7 +67,15 @@ body {
   background:
     radial-gradient(circle at 50% 0%, rgb(245 192 92 / 30%), transparent 26rem),
     radial-gradient(circle at 16% 24%, rgb(104 25 36 / 26%), transparent 24rem),
-    linear-gradient(135deg, #17110f, #0d0b0a 58%, #241713);
+    linear-gradient(135deg, #fff8ea, #f2dfbf 58%, #ead0a6);
+}
+
+.hero-bg-image {
+  object-position: center;
+}
+
+[dir="rtl"] .hero-bg-image {
+  transform: scaleX(-1);
 }
 
 .paper-grain {

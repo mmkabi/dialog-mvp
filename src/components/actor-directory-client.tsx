@@ -1,6 +1,6 @@
 "use client";
 
-import { Filter, Search, X } from "lucide-react";
+import { Filter, X } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import {
@@ -13,7 +13,6 @@ import {
   SelectInput,
   TextInput,
   TrustBadge,
-  WaveformPlayer,
 } from "@/components/ui/primitives";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/messages";
@@ -22,7 +21,6 @@ import type { ActorSkill, AvailabilityStatus, Gender, Profile } from "@/lib/type
 const actorSkills: ActorSkill[] = [
   "theatre",
   "cinema",
-  "voiceActing",
   "dubbing",
   "bodyMovement",
   "speech",
@@ -49,12 +47,10 @@ export function ActorDirectoryClient({
   const [gender, setGender] = useState("all");
   const [ageBand, setAgeBand] = useState("all");
   const [heightBand, setHeightBand] = useState("all");
-  const [voiceType, setVoiceType] = useState("all");
   const [skill, setSkill] = useState("all");
   const [availability, setAvailability] = useState("all");
 
   const cities = Array.from(new Set(actors.map((actor) => actor.city[locale])));
-  const voices = Array.from(new Set(actors.map((actor) => actor.voiceType[locale])));
 
   const filteredActors = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase(locale);
@@ -64,7 +60,6 @@ export function ActorDirectoryClient({
       const searchable = [
         fullName,
         actor.city[locale],
-        actor.voiceType[locale],
         actor.bio[locale],
         ...actor.skills.map((item) => dictionary.skills[item]),
       ]
@@ -84,7 +79,6 @@ export function ActorDirectoryClient({
         (heightBand === "under-170" && actor.heightCm < 170) ||
         (heightBand === "170-180" && actor.heightCm >= 170 && actor.heightCm <= 180) ||
         (heightBand === "over-180" && actor.heightCm > 180);
-      const matchesVoice = voiceType === "all" || actor.voiceType[locale] === voiceType;
       const matchesSkill = skill === "all" || actor.skills.includes(skill as ActorSkill);
       const matchesAvailability = availability === "all" || actor.availability === availability;
 
@@ -94,12 +88,11 @@ export function ActorDirectoryClient({
         matchesGender &&
         matchesAge &&
         matchesHeight &&
-        matchesVoice &&
         matchesSkill &&
         matchesAvailability
       );
     });
-  }, [actors, availability, ageBand, city, dictionary.skills, gender, heightBand, locale, query, skill, voiceType]);
+  }, [actors, availability, ageBand, city, dictionary.skills, gender, heightBand, locale, query, skill]);
 
   function clearFilters() {
     setQuery("");
@@ -107,7 +100,6 @@ export function ActorDirectoryClient({
     setGender("all");
     setAgeBand("all");
     setHeightBand("all");
-    setVoiceType("all");
     setSkill("all");
     setAvailability("all");
   }
@@ -170,15 +162,6 @@ export function ActorDirectoryClient({
             ]}
           />
           <SelectInput
-            label={dictionary.common.voiceType}
-            value={voiceType}
-            onChange={setVoiceType}
-            options={[
-              { value: "all", label: dictionary.common.all },
-              ...voices.map((item) => ({ value: item, label: item })),
-            ]}
-          />
-          <SelectInput
             label={dictionary.common.skill}
             value={skill}
             onChange={setSkill}
@@ -229,21 +212,14 @@ export function ActorDirectoryClient({
                       </Badge>
                     </div>
                     <p className="mt-3 line-clamp-3 text-sm leading-7 text-[var(--text-muted)]">{actor.bio[locale]}</p>
-                    <div className="mt-4">
-                      <WaveformPlayer label={actor.voiceType[locale]} />
-                    </div>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {actor.skills.slice(0, 5).map((item) => (
+                      {actor.skills.filter((item) => item !== "voiceActing").slice(0, 5).map((item) => (
                         <Badge key={item} tone="calm">
                           {dictionary.skills[item]}
                         </Badge>
                       ))}
                     </div>
-                    <div className="mt-5 flex items-center justify-between gap-3">
-                      <span className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)]">
-                        <Search className="h-4 w-4" aria-hidden="true" />
-                        {actor.voiceType[locale]}
-                      </span>
+                    <div className="mt-5 flex items-center justify-end gap-3">
                       <ButtonLink href={`/${locale}/actors/${actor.id}`} variant="secondary">
                         {dictionary.common.details}
                       </ButtonLink>

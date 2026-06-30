@@ -10,7 +10,6 @@ import {
   PageSection,
   SectionHeader,
   TrustBadge,
-  WaveformPlayer,
 } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 import { getActor, l } from "@/lib/mock-services";
@@ -52,7 +51,6 @@ export default async function ActorDetailPage({
             <InfoRow label={dictionary.common.gender} value={dictionary.genders[actor.gender]} />
             <InfoRow label={dictionary.common.age} value={`${actor.age} ${dictionary.common.years}`} />
             <InfoRow label={dictionary.common.height} value={`${actor.heightCm} ${dictionary.common.centimeters}`} />
-            <InfoRow label={dictionary.common.voiceType} value={l(actor.voiceType, locale)} />
             <InfoRow label={dictionary.common.availability} value={dictionary.availability[actor.availability]} />
           </dl>
         </Card>
@@ -66,20 +64,17 @@ export default async function ActorDetailPage({
             <p className="mt-4 leading-8 text-[var(--text-muted)]">{l(actor.actingResume, locale)}</p>
           </Card>
 
-          <Card as="section" className="bg-[var(--stage-black)] text-white">
+          <Card as="section" className="paper-grain">
             <div className="flex items-center gap-2">
               <UserRound className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-white">{dictionary.actors.skillsTitle}</h2>
+              <h2 className="text-xl font-semibold text-[var(--foreground)]">{dictionary.actors.skillsTitle}</h2>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              {actor.skills.map((skill) => (
+              {actor.skills.filter((skill) => skill !== "voiceActing").map((skill) => (
                 <Badge key={skill} tone="calm">
                   {dictionary.skills[skill]}
                 </Badge>
               ))}
-            </div>
-            <div className="mt-5">
-              <WaveformPlayer label={l(actor.voiceType, locale)} />
             </div>
           </Card>
 

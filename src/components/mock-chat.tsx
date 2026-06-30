@@ -38,7 +38,7 @@ export function MockChat({
 
   return (
     <div className="grid gap-4">
-      <div className="min-h-[360px] rounded-2xl border border-[var(--border-soft)] bg-[var(--stage-black)] p-4 shadow-2xl shadow-black/15">
+      <div className="min-h-[360px] rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-paper)] p-4 shadow-2xl shadow-[rgb(100_70_30_/_10%)]">
         <div className="space-y-4">
           {messages.map((message) => (
             <div
@@ -52,13 +52,13 @@ export function MockChat({
               ) : null}
               <p
                 className={`max-w-[78%] rounded-lg px-4 py-3 text-sm leading-6 ${
-                  message.role === "user" ? "bg-[var(--primary)] text-white" : "bg-white/10 text-white"
+                  message.role === "user" ? "bg-[var(--primary)] text-white" : "bg-[var(--surface-warm)] text-[var(--foreground)]"
                 }`}
               >
                 {message.content}
               </p>
               {message.role === "user" ? (
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-white/10 text-[var(--accent-soft)]">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-[var(--surface-warm)] text-[var(--primary)]">
                   <UserRound className="h-4 w-4" />
                 </span>
               ) : null}

@@ -45,19 +45,20 @@ export function AppShell({
 
   return (
     <div className="min-h-screen text-[var(--foreground)]">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-[var(--stage-black)]/92 text-white shadow-2xl shadow-black/15 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-[#dec89f]/80 bg-[linear-gradient(135deg,rgba(255,250,240,0.96),rgba(248,237,220,0.94)_48%,rgba(246,221,170,0.78))] text-[var(--foreground)] shadow-[0_18px_50px_rgb(108_70_28_/_12%)] backdrop-blur-xl">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/70 to-transparent" aria-hidden="true" />
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-3">
             <Link href={base} className="flex min-w-0 items-center gap-3">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[var(--primary)] via-[#2a1113] to-black text-[var(--accent-soft)] ring-1 ring-[var(--accent)]/30">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#fff7dc] via-[var(--accent-soft)] to-[var(--primary-soft)] text-[var(--primary)] shadow-inner shadow-white/60 ring-1 ring-[var(--accent)]/45">
                 <Theater className="h-5 w-5" aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block truncate text-base font-bold tracking-tight">{dictionary.brand.name}</span>
-                <span className="block truncate text-xs text-white/58">{dictionary.brand.tagline}</span>
+                <span className="block truncate text-base font-bold tracking-tight text-[var(--primary)]">{dictionary.brand.name}</span>
+                <span className="block truncate text-xs text-[var(--text-muted)]">{dictionary.brand.tagline}</span>
               </span>
             </Link>
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2 rounded-full border border-white/70 bg-white/42 p-1 shadow-sm">
               <ButtonLink href={`${base}/login`} variant="ghost">
                 {dictionary.nav.login}
               </ButtonLink>
@@ -65,13 +66,13 @@ export function AppShell({
             </div>
           </div>
           <nav aria-label={dictionary.nav.dashboard} className="overflow-x-auto">
-            <div className="flex min-w-max gap-2 pb-1">
+            <div className="flex min-w-max gap-2 rounded-full border border-white/55 bg-white/35 p-1 shadow-inner shadow-white/40">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "inline-flex min-h-10 items-center gap-2 rounded-full border border-transparent px-3.5 py-2 text-sm font-medium text-white/68 transition hover:border-[var(--accent)]/30 hover:bg-white/8 hover:text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]",
+                    "inline-flex min-h-10 items-center gap-2 rounded-full border border-transparent px-3.5 py-2 text-sm font-semibold text-[#6d5e4d] transition hover:border-[var(--accent)]/35 hover:bg-[var(--surface-paper)] hover:text-[var(--primary)] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]",
                   )}
                 >
                   {item.icon}
@@ -83,16 +84,16 @@ export function AppShell({
         </div>
       </header>
       <main className="relative">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[var(--stage-black)] to-transparent" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[var(--surface-paper)] to-transparent" aria-hidden="true" />
         <div className="relative">{children}</div>
       </main>
-      <footer className="border-t border-[var(--border-soft)] bg-[var(--stage-black)] text-white">
-        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-7 text-sm text-white/68 sm:px-6 md:grid-cols-[1fr_auto] lg:px-8">
+      <footer className="border-t border-[var(--border-soft)] bg-[var(--surface-paper)] text-[var(--foreground)]">
+        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-7 text-sm text-[var(--text-muted)] sm:px-6 md:grid-cols-[1fr_auto] lg:px-8">
           <div className="flex items-start gap-3">
             <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" aria-hidden="true" />
             <p>{dictionary.common.reportPlaceholder}</p>
           </div>
-          <Link href={`${base}/admin`} className="font-semibold text-[var(--accent-soft)] hover:text-white">
+          <Link href={`${base}/admin`} className="font-semibold text-[var(--primary)] hover:text-[var(--accent)]">
             <TrustBadge>{dictionary.nav.safety}</TrustBadge>
           </Link>
         </div>

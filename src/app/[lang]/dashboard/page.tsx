@@ -41,9 +41,9 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
           </div>
         </Card>
 
-        <Card as="section" className="bg-[var(--stage-black)] text-white">
-          <h2 className="text-lg font-semibold text-white">{dictionary.dashboard.continueLearning}</h2>
-          <p className="mt-2 text-sm text-white/60">{l(dashboard.learningAgent.name, locale)}</p>
+        <Card as="section" className="bg-[var(--surface-paper)]">
+          <h2 className="text-lg font-semibold text-[var(--foreground)]">{dictionary.dashboard.continueLearning}</h2>
+          <p className="mt-2 text-sm text-[var(--text-muted)]">{l(dashboard.learningAgent.name, locale)}</p>
           <p className="mt-1 font-medium text-[var(--accent-soft)]">{l(dashboard.learningAgent.method, locale)}</p>
           <div className="mt-5">
             <ProgressBar value={42} label={dictionary.education.progress} />
@@ -114,7 +114,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
         <div className="grid gap-4 md:grid-cols-5">
           {modules.map((module) => (
             <Card key={module.href} as="article">
-              <div className="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-[var(--stage-black)] text-[var(--accent-soft)]">
+              <div className="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-[var(--accent-soft)] text-[var(--primary)]">
                 {module.icon}
               </div>
               <h2 className="text-base font-semibold text-[var(--foreground)]">{module.label}</h2>

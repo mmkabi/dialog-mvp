@@ -38,7 +38,6 @@ export default async function CreatePracticeRequestPage({ params }: { params: Pr
               ]}
             />
             <TextInput label={dictionary.practice.approximateAge} />
-            <TextInput label={dictionary.common.voiceType} />
             <TextInput label={dictionary.practice.cityOrOnline} />
             <TextInput label={dictionary.practice.proposedTime} />
           </div>

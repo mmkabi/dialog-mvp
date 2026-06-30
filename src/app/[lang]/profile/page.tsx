@@ -29,7 +29,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
           <h2 className="mt-4 text-xl font-semibold text-zinc-950">{name}</h2>
           <p className="mt-2 text-sm leading-6 text-zinc-600">{l(actor.bio, locale)}</p>
           <div className="mt-4 flex flex-wrap gap-2">
-            {actor.skills.slice(0, 5).map((skill) => (
+            {actor.skills.filter((skill) => skill !== "voiceActing").slice(0, 5).map((skill) => (
               <Badge key={skill} tone="calm">
                 {dictionary.skills[skill]}
               </Badge>
@@ -56,7 +56,6 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
                 ]}
               />
               <TextInput label={dictionary.common.height} type="number" defaultValue={String(actor.heightCm)} />
-              <TextInput label={dictionary.common.voiceType} defaultValue={l(actor.voiceType, locale)} />
               <SelectInput
                 label={dictionary.common.availability}
                 defaultValue={actor.availability}
@@ -76,7 +75,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ lang: 
             <h2 className="mb-4 text-lg font-semibold text-zinc-950">{dictionary.profile.resume}</h2>
             <TextArea label={dictionary.actors.resumeTitle} defaultValue={l(actor.actingResume, locale)} />
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {Object.entries(dictionary.skills).map(([key, label]) => (
+              {Object.entries(dictionary.skills).filter(([key]) => key !== "voiceActing").map(([key, label]) => (
                 <label key={key} className="flex items-center gap-2 rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm text-zinc-700">
                   <input type="checkbox" defaultChecked={actor.skills.includes(key as ActorSkill)} className="h-4 w-4 accent-teal-700" />
                   {label}

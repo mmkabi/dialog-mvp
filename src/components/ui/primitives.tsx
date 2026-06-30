@@ -77,7 +77,7 @@ export function ButtonLink({
       href={href}
       className={cn(
         "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]",
-        variant === "primary" && "bg-[var(--primary)] text-white shadow-lg shadow-[rgb(104_25_36_/_20%)] hover:bg-[#4f121b]",
+        variant === "primary" && "bg-[var(--primary)] text-white shadow-lg shadow-[rgb(104_25_36_/_20%)] hover:bg-[#7c2430]",
         variant === "secondary" && "border border-[var(--border-soft)] bg-[var(--surface-paper)] text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--primary)]",
         variant === "ghost" && "text-[var(--text-muted)] hover:bg-[var(--accent-soft)]/35 hover:text-[var(--primary)]",
       )}
@@ -107,7 +107,7 @@ export function Button({
       onClick={onClick}
       className={cn(
         "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]",
-        variant === "primary" && "bg-[var(--primary)] text-white shadow-lg shadow-[rgb(104_25_36_/_20%)] hover:bg-[#4f121b]",
+        variant === "primary" && "bg-[var(--primary)] text-white shadow-lg shadow-[rgb(104_25_36_/_20%)] hover:bg-[#7c2430]",
         variant === "secondary" && "border border-[var(--border-soft)] bg-[var(--surface-paper)] text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--primary)]",
         variant === "ghost" && "text-[var(--text-muted)] hover:bg-[var(--accent-soft)]/35 hover:text-[var(--primary)]",
       )}
@@ -309,7 +309,7 @@ export function TextArea({
 
 export function TrustBadge({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/35 bg-[var(--stage-black)] px-3 py-1.5 text-xs font-semibold text-[var(--accent-soft)] shadow-sm">
+    <span className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/35 bg-[var(--surface-paper)] px-3 py-1.5 text-xs font-semibold text-[var(--primary)] shadow-sm">
       <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
       {children}
     </span>
@@ -320,7 +320,7 @@ export function WaveformPlayer({ label }: { label: string }) {
   const bars = [32, 56, 84, 44, 68, 92, 38, 74, 50, 88, 46, 64, 78, 36, 58, 82, 42, 72];
 
   return (
-    <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--stage-black)] p-4 text-white shadow-lg">
+    <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-paper)] p-4 text-[var(--foreground)] shadow-lg">
       <div className="mb-3 flex items-center justify-between gap-3">
         <span className="text-sm font-semibold">{label}</span>
         <span className="h-2 w-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
