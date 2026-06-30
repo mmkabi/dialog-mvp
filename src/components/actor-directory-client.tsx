@@ -12,6 +12,8 @@ import {
   EmptyState,
   SelectInput,
   TextInput,
+  TrustBadge,
+  WaveformPlayer,
 } from "@/components/ui/primitives";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/messages";
@@ -112,10 +114,13 @@ export function ActorDirectoryClient({
 
   return (
     <div className="grid gap-6">
-      <Card>
-        <div className="mb-4 flex items-center gap-2 text-sm font-semibold text-zinc-800">
-          <Filter className="h-4 w-4 text-teal-700" aria-hidden="true" />
-          {dictionary.common.filters}
+      <Card className="paper-grain">
+        <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center gap-2 text-sm font-semibold text-[var(--foreground)]">
+            <Filter className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
+            {dictionary.common.filters}
+          </div>
+          <TrustBadge>{dictionary.safety.castingFairness}</TrustBadge>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <TextInput
@@ -193,7 +198,7 @@ export function ActorDirectoryClient({
           />
         </div>
         <div className="mt-4 flex items-center justify-between gap-3">
-          <p className="text-sm text-zinc-600">
+          <p className="text-sm text-[var(--text-muted)]">
             {filteredActors.length} {dictionary.actors.resultCount}
           </p>
           <Button variant="secondary" onClick={clearFilters} icon={<X className="h-4 w-4" />}>
@@ -203,18 +208,18 @@ export function ActorDirectoryClient({
       </Card>
 
       {filteredActors.length ? (
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2">
           {filteredActors.map((actor) => {
             const name = `${actor.firstName[locale]} ${actor.lastName[locale]}`;
             return (
-              <Card key={actor.id} as="article" className="transition hover:-translate-y-1 hover:shadow-md">
+              <Card key={actor.id} as="article" className="paper-grain">
                 <div className="flex items-start gap-4">
                   <AvatarMark label={name} tone={actor.photoTone} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                       <div>
-                        <h2 className="text-xl font-semibold text-zinc-950">{name}</h2>
-                        <p className="mt-1 text-sm text-zinc-600">
+                        <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">{name}</h2>
+                        <p className="mt-1 text-sm text-[var(--text-muted)]">
                           {actor.city[locale]} · {actor.age} {dictionary.common.years} · {actor.heightCm}{" "}
                           {dictionary.common.centimeters}
                         </p>
@@ -223,7 +228,10 @@ export function ActorDirectoryClient({
                         {dictionary.availability[actor.availability]}
                       </Badge>
                     </div>
-                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-zinc-700">{actor.bio[locale]}</p>
+                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-[var(--text-muted)]">{actor.bio[locale]}</p>
+                    <div className="mt-4">
+                      <WaveformPlayer label={actor.voiceType[locale]} />
+                    </div>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {actor.skills.slice(0, 5).map((item) => (
                         <Badge key={item} tone="calm">
@@ -232,7 +240,7 @@ export function ActorDirectoryClient({
                       ))}
                     </div>
                     <div className="mt-5 flex items-center justify-between gap-3">
-                      <span className="inline-flex items-center gap-2 text-sm text-zinc-500">
+                      <span className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)]">
                         <Search className="h-4 w-4" aria-hidden="true" />
                         {actor.voiceType[locale]}
                       </span>

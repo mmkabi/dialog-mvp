@@ -16,7 +16,7 @@ export function LanguageSwitcher({ locale, dictionary }: { locale: Locale; dicti
   return (
     <Link
       href={href}
-      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm font-semibold text-zinc-800 transition hover:border-teal-600 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2"
+      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/8 px-3.5 py-2 text-sm font-semibold text-white transition hover:border-[var(--accent)]/50 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
       aria-label={dictionary.language.switchTo}
     >
       <Languages className="h-4 w-4" aria-hidden="true" />

@@ -9,6 +9,8 @@ import {
   InfoRow,
   PageSection,
   SectionHeader,
+  TrustBadge,
+  WaveformPlayer,
 } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 import { getActor, l } from "@/lib/mock-services";
@@ -40,9 +42,11 @@ export default async function ActorDetailPage({
         }
       />
       <div className="grid gap-5 lg:grid-cols-[340px_1fr]">
-        <Card as="aside">
+        <Card as="aside" className="paper-grain">
           <AvatarMark label={name} tone={actor.photoTone} size="lg" />
-          <p className="mt-4 text-sm text-zinc-500">{dictionary.actors.profilePhoto}</p>
+          <div className="mt-4">
+            <TrustBadge>{dictionary.actors.profilePhoto}</TrustBadge>
+          </div>
           <dl className="mt-5">
             <InfoRow label={dictionary.common.city} value={l(actor.city, locale)} />
             <InfoRow label={dictionary.common.gender} value={dictionary.genders[actor.gender]} />
@@ -54,18 +58,18 @@ export default async function ActorDetailPage({
         </Card>
 
         <div className="grid gap-5">
-          <Card as="section">
+          <Card as="section" className="paper-grain">
             <div className="flex items-center gap-2">
-              <BriefcaseBusiness className="h-5 w-5 text-teal-700" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-zinc-950">{dictionary.actors.resumeTitle}</h2>
+              <BriefcaseBusiness className="h-5 w-5 text-[var(--primary)]" aria-hidden="true" />
+              <h2 className="text-xl font-semibold text-[var(--foreground)]">{dictionary.actors.resumeTitle}</h2>
             </div>
-            <p className="mt-4 leading-7 text-zinc-700">{l(actor.actingResume, locale)}</p>
+            <p className="mt-4 leading-8 text-[var(--text-muted)]">{l(actor.actingResume, locale)}</p>
           </Card>
 
-          <Card as="section">
+          <Card as="section" className="bg-[var(--stage-black)] text-white">
             <div className="flex items-center gap-2">
-              <UserRound className="h-5 w-5 text-teal-700" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-zinc-950">{dictionary.actors.skillsTitle}</h2>
+              <UserRound className="h-5 w-5 text-[var(--accent)]" aria-hidden="true" />
+              <h2 className="text-xl font-semibold text-white">{dictionary.actors.skillsTitle}</h2>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               {actor.skills.map((skill) => (
@@ -74,19 +78,22 @@ export default async function ActorDetailPage({
                 </Badge>
               ))}
             </div>
+            <div className="mt-5">
+              <WaveformPlayer label={l(actor.voiceType, locale)} />
+            </div>
           </Card>
 
-          <Card as="section">
+          <Card as="section" className="paper-grain">
             <div className="flex items-center gap-2">
-              <Ruler className="h-5 w-5 text-teal-700" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-zinc-950">{dictionary.actors.portfolioTitle}</h2>
+              <Ruler className="h-5 w-5 text-[var(--primary)]" aria-hidden="true" />
+              <h2 className="text-xl font-semibold text-[var(--foreground)]">{dictionary.actors.portfolioTitle}</h2>
             </div>
-            <div className="mt-4 divide-y divide-zinc-100">
+            <div className="mt-4 divide-y divide-[var(--border-soft)]">
               {actor.portfolioItems.map((item) => (
                 <div key={item.id} className="flex items-center justify-between gap-4 py-3">
                   <div>
-                    <p className="font-medium text-zinc-900">{l(item.title, locale)}</p>
-                    <p className="text-sm text-zinc-500">{item.year}</p>
+                    <p className="font-semibold text-[var(--foreground)]">{l(item.title, locale)}</p>
+                    <p className="text-sm text-[var(--text-muted)]">{item.year}</p>
                   </div>
                   <Badge>{dictionary.portfolioTypes[item.type]}</Badge>
                 </div>
@@ -94,12 +101,12 @@ export default async function ActorDetailPage({
             </div>
           </Card>
 
-          <Card as="section">
+          <Card as="section" className="paper-grain">
             <div className="flex items-center gap-2">
-              <Mail className="h-5 w-5 text-teal-700" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-zinc-950">{dictionary.actors.contactPreference}</h2>
+              <Mail className="h-5 w-5 text-[var(--primary)]" aria-hidden="true" />
+              <h2 className="text-xl font-semibold text-[var(--foreground)]">{dictionary.actors.contactPreference}</h2>
             </div>
-            <p className="mt-4 leading-7 text-zinc-700">{l(actor.contactPreference, locale)}</p>
+            <p className="mt-4 leading-8 text-[var(--text-muted)]">{l(actor.contactPreference, locale)}</p>
           </Card>
         </div>
       </div>

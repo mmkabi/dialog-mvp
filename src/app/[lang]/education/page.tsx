@@ -32,26 +32,26 @@ export default async function EducationPage({ params }: { params: Promise<{ lang
           const firstOpenLesson = agent.lessons.find((lesson) => lesson.state !== "locked") ?? agent.lessons[0];
 
           return (
-            <Card key={agent.id} as="article" className="flex flex-col">
+            <Card key={agent.id} as="article" className="flex flex-col bg-[var(--stage-black)] text-white">
               <div className="flex items-start gap-4">
                 <AvatarMark label={l(agent.name, locale)} tone={agent.avatarTone} />
                 <div>
-                  <h2 className="text-lg font-semibold text-zinc-950">{l(agent.name, locale)}</h2>
-                  <p className="mt-1 text-sm font-medium text-teal-800">{l(agent.method, locale)}</p>
+                  <h2 className="text-xl font-semibold tracking-tight text-white">{l(agent.name, locale)}</h2>
+                  <p className="mt-1 text-sm font-medium text-[var(--accent-soft)]">{l(agent.method, locale)}</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-6 text-zinc-600">{l(agent.description, locale)}</p>
+              <p className="mt-4 text-sm leading-7 text-white/68">{l(agent.description, locale)}</p>
 
               <div className="mt-5">
                 <ProgressBar value={progress} label={dictionary.education.progress} />
               </div>
 
               <div className="mt-5">
-                <h3 className="text-sm font-semibold text-zinc-900">{dictionary.education.sampleLessons}</h3>
+                <h3 className="text-sm font-semibold text-white">{dictionary.education.sampleLessons}</h3>
                 <div className="mt-3 space-y-2">
                   {agent.lessons.slice(0, 3).map((lesson) => (
-                    <div key={lesson.id} className="flex items-center justify-between gap-3 rounded-md bg-zinc-50 px-3 py-2">
-                      <span className="text-sm text-zinc-700">{l(lesson.title, locale)}</span>
+                    <div key={lesson.id} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/7 px-3 py-2">
+                      <span className="text-sm text-white/78">{l(lesson.title, locale)}</span>
                       <Badge tone={lesson.state === "completed" ? "success" : lesson.state === "inProgress" ? "warm" : "default"}>
                         {dictionary.lessonStates[lesson.state]}
                       </Badge>
@@ -61,7 +61,7 @@ export default async function EducationPage({ params }: { params: Promise<{ lang
               </div>
 
               <div className="mt-5">
-                <h3 className="text-sm font-semibold text-zinc-900">{dictionary.education.sampleExercises}</h3>
+                <h3 className="text-sm font-semibold text-white">{dictionary.education.sampleExercises}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {agent.exercises.slice(0, 3).map((exercise) => (
                     <Badge key={l(exercise, locale)} tone="calm">

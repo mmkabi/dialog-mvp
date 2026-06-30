@@ -1,6 +1,6 @@
 import { ArrowRight, BookOpen, BriefcaseBusiness, HeartPulse, MessageCircle, Mic2, UserRound } from "lucide-react";
 
-import { AvatarMark, Badge, ButtonLink, Card, PageSection, ProgressBar, SectionHeader } from "@/components/ui/primitives";
+import { AvatarMark, Badge, ButtonLink, Card, PageSection, ProgressBar, SectionHeader, TrustBadge } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 import { getDashboardData, l } from "@/lib/mock-services";
 
@@ -21,14 +21,14 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
   return (
     <PageSection>
       <SectionHeader title={dictionary.dashboard.title} subtitle={dictionary.dashboard.subtitle} />
-      <div className="grid gap-5 lg:grid-cols-3">
-        <Card as="section">
+      <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr_0.85fr]">
+        <Card as="section" className="paper-grain lg:row-span-2">
           <div className="flex items-start gap-4">
             <AvatarMark label={actorName} tone={actor.photoTone} />
             <div>
-              <h2 className="text-lg font-semibold text-zinc-950">{dictionary.dashboard.profileSummary}</h2>
-              <p className="mt-1 font-medium text-zinc-800">{actorName}</p>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">{l(actor.bio, locale)}</p>
+              <TrustBadge>{dictionary.dashboard.profileSummary}</TrustBadge>
+              <p className="mt-4 text-3xl font-semibold tracking-tight text-[var(--foreground)]">{actorName}</p>
+              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">{l(actor.bio, locale)}</p>
             </div>
           </div>
           <div className="mt-5">
@@ -41,10 +41,10 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
           </div>
         </Card>
 
-        <Card as="section">
-          <h2 className="text-lg font-semibold text-zinc-950">{dictionary.dashboard.continueLearning}</h2>
-          <p className="mt-2 text-sm text-zinc-600">{l(dashboard.learningAgent.name, locale)}</p>
-          <p className="mt-1 font-medium text-zinc-900">{l(dashboard.learningAgent.method, locale)}</p>
+        <Card as="section" className="bg-[var(--stage-black)] text-white">
+          <h2 className="text-lg font-semibold text-white">{dictionary.dashboard.continueLearning}</h2>
+          <p className="mt-2 text-sm text-white/60">{l(dashboard.learningAgent.name, locale)}</p>
+          <p className="mt-1 font-medium text-[var(--accent-soft)]">{l(dashboard.learningAgent.method, locale)}</p>
           <div className="mt-5">
             <ProgressBar value={42} label={dictionary.education.progress} />
           </div>
@@ -59,10 +59,10 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
           </div>
         </Card>
 
-        <Card as="section">
-          <h2 className="text-lg font-semibold text-zinc-950">{dictionary.dashboard.todaySpeech}</h2>
-          <p className="mt-2 font-medium text-zinc-900">{l(dashboard.speechExercise.title, locale)}</p>
-          <p className="mt-2 text-sm leading-6 text-zinc-600">{l(dashboard.speechExercise.description, locale)}</p>
+        <Card as="section" className="border-[#b9d7d9] bg-[#edf7f7]">
+          <h2 className="text-lg font-semibold text-[var(--foreground)]">{dictionary.dashboard.todaySpeech}</h2>
+          <p className="mt-2 font-medium text-[#24565c]">{l(dashboard.speechExercise.title, locale)}</p>
+          <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">{l(dashboard.speechExercise.description, locale)}</p>
           <div className="mt-5">
             <ProgressBar value={dashboard.speechExercise.progress} label={dictionary.speech.tracker} />
           </div>
@@ -75,14 +75,14 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
-        <Card as="section">
-          <h2 className="text-lg font-semibold text-zinc-950">{dictionary.dashboard.latestCasting}</h2>
-          <div className="mt-4 divide-y divide-zinc-100">
+        <Card as="section" className="paper-grain">
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">{dictionary.dashboard.latestCasting}</h2>
+          <div className="mt-4 divide-y divide-[var(--border-soft)]">
             {dashboard.latestCastingCalls.map((call) => (
               <div key={call.id} className="flex items-center justify-between gap-4 py-3">
                 <div>
-                  <p className="font-medium text-zinc-900">{l(call.projectTitle, locale)}</p>
-                  <p className="text-sm text-zinc-500">{l(call.city, locale)}</p>
+                  <p className="font-semibold text-[var(--foreground)]">{l(call.projectTitle, locale)}</p>
+                  <p className="text-sm text-[var(--text-muted)]">{l(call.city, locale)}</p>
                 </div>
                 <ButtonLink href={`${base}/casting/${call.id}`} variant="ghost">
                   {dictionary.common.view}
@@ -91,14 +91,14 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
             ))}
           </div>
         </Card>
-        <Card as="section">
-          <h2 className="text-lg font-semibold text-zinc-950">{dictionary.dashboard.latestPractice}</h2>
-          <div className="mt-4 divide-y divide-zinc-100">
+        <Card as="section" className="paper-grain">
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">{dictionary.dashboard.latestPractice}</h2>
+          <div className="mt-4 divide-y divide-[var(--border-soft)]">
             {dashboard.latestPracticeRequests.map((request) => (
               <div key={request.id} className="flex items-center justify-between gap-4 py-3">
                 <div>
-                  <p className="font-medium text-zinc-900">{l(request.title, locale)}</p>
-                  <p className="text-sm text-zinc-500">{l(request.cityOrOnline, locale)}</p>
+                  <p className="font-semibold text-[var(--foreground)]">{l(request.title, locale)}</p>
+                  <p className="text-sm text-[var(--text-muted)]">{l(request.cityOrOnline, locale)}</p>
                 </div>
                 <ButtonLink href={`${base}/practice/${request.id}`} variant="ghost">
                   {dictionary.common.view}
@@ -114,10 +114,10 @@ export default async function DashboardPage({ params }: { params: Promise<{ lang
         <div className="grid gap-4 md:grid-cols-5">
           {modules.map((module) => (
             <Card key={module.href} as="article">
-              <div className="mb-4 grid h-11 w-11 place-items-center rounded-lg bg-teal-100 text-teal-800">
+              <div className="mb-4 grid h-11 w-11 place-items-center rounded-2xl bg-[var(--stage-black)] text-[var(--accent-soft)]">
                 {module.icon}
               </div>
-              <h2 className="text-base font-semibold text-zinc-950">{module.label}</h2>
+              <h2 className="text-base font-semibold text-[var(--foreground)]">{module.label}</h2>
               <div className="mt-4">
                 <ButtonLink href={module.href} variant="ghost">
                   {dictionary.common.view}

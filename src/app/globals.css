@@ -1,27 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f4ef;
-  --foreground: #18181b;
+  --background: #f6efe3;
+  --foreground: #191512;
+  --stage-black: #0d0b0a;
+  --stage-ink: #171312;
+  --stage-graphite: #2c2522;
+  --surface-paper: #fff8ea;
+  --surface-warm: #f8eddc;
+  --surface-raised: #fffaf0;
+  --border-soft: #e5d6bd;
+  --text-muted: #74685b;
+  --primary: #681924;
+  --primary-soft: #f2d7d1;
+  --accent: #d49a2a;
+  --accent-soft: #f6ddaa;
+  --speech-calm: #5f9ca1;
+  --success: #3f7a56;
+  --danger: #9a2934;
+  --shadow-cinematic: 0 24px 70px rgb(49 25 13 / 12%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Arial, Helvetica, sans-serif;
+  --color-stage-black: var(--stage-black);
+  --color-surface-paper: var(--surface-paper);
+  --color-surface-warm: var(--surface-warm);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --font-sans: "Manrope", "Inter", Arial, Helvetica, sans-serif;
   --font-mono: "Courier New", monospace;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 18% -10%, rgb(212 154 42 / 20%), transparent 34rem),
+    radial-gradient(circle at 92% 8%, rgb(104 25 36 / 16%), transparent 30rem),
+    linear-gradient(180deg, #15110f 0, #15110f 18rem, var(--background) 18rem);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Manrope", "Inter", Arial, Helvetica, sans-serif;
   min-height: 100vh;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 [dir="rtl"] body {
-  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-family: "Vazirmatn", "Dana", Tahoma, Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -29,8 +54,50 @@ body {
 }
 
 ::selection {
-  background: #0f766e;
+  background: var(--primary);
   color: #ffffff;
+}
+
+:focus-visible {
+  outline: 3px solid rgb(212 154 42 / 72%);
+  outline-offset: 3px;
+}
+
+.stage-vignette {
+  background:
+    radial-gradient(circle at 50% 0%, rgb(245 192 92 / 30%), transparent 26rem),
+    radial-gradient(circle at 16% 24%, rgb(104 25 36 / 26%), transparent 24rem),
+    linear-gradient(135deg, #17110f, #0d0b0a 58%, #241713);
+}
+
+.paper-grain {
+  background-image:
+    linear-gradient(135deg, rgb(255 255 255 / 30%), rgb(255 255 255 / 0)),
+    radial-gradient(circle at 20% 20%, rgb(104 25 36 / 5%) 0 1px, transparent 1px);
+  background-size: auto, 18px 18px;
+}
+
+.reveal-up {
+  animation: reveal-up 620ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+
+.spotlight-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-hover::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--spot-x, 50%) 0%, rgb(212 154 42 / 18%), transparent 17rem);
+  transition: opacity 220ms ease;
+}
+
+.spotlight-hover:hover::before {
+  opacity: 1;
 }
 
 .reward-pulse {
@@ -46,5 +113,49 @@ body {
   50% {
     transform: scale(1.06);
     opacity: 1;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes waveform {
+  0%,
+  100% {
+    transform: scaleY(0.36);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.62;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
