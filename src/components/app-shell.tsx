@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  Award,
   BriefcaseBusiness,
   HeartPulse,
   LayoutDashboard,
@@ -7,17 +8,18 @@ import {
   Mic2,
   ShieldCheck,
   Sparkles,
-  Theater,
   UserRound,
   UsersRound,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ButtonLink, TrustBadge, cn } from "@/components/ui/primitives";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/messages";
+import { featureCopy, t } from "@/lib/feature-content";
 
 const iconClass = "h-4 w-4";
 
@@ -40,6 +42,7 @@ export function AppShell({
     { href: `${base}/casting`, label: dictionary.nav.casting, icon: <BriefcaseBusiness className={iconClass} /> },
     { href: `${base}/speech`, label: dictionary.nav.speech, icon: <Mic2 className={iconClass} /> },
     { href: `${base}/children`, label: dictionary.nav.children, icon: <HeartPulse className={iconClass} /> },
+    { href: `${base}/certificates`, label: t(featureCopy.certificates, locale), icon: <Award className={iconClass} /> },
     { href: `${base}/admin`, label: dictionary.nav.admin, icon: <ShieldCheck className={iconClass} /> },
   ];
 
@@ -50,8 +53,8 @@ export function AppShell({
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-3">
             <Link href={base} className="flex min-w-0 items-center gap-3">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#fff7dc] via-[var(--accent-soft)] to-[var(--primary-soft)] text-[var(--primary)] shadow-inner shadow-white/60 ring-1 ring-[var(--accent)]/45">
-                <Theater className="h-5 w-5" aria-hidden="true" />
+              <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-inner shadow-white/60 ring-1 ring-[var(--accent)]/45">
+                <Image src="/brand/dialog-logo.svg" alt="" width={42} height={34} className="h-10 w-10 object-contain" />
               </span>
               <span className="min-w-0">
                 <span className="block truncate text-base font-bold tracking-tight text-[var(--primary)]">{dictionary.brand.name}</span>

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { MockChat } from "@/components/mock-chat";
+import { TeacherStudioClient } from "@/components/teacher-studio-client";
 import { AvatarMark, ButtonLink, Card, PageSection, SafetyNote, SectionHeader } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 import { locales } from "@/i18n/config";
@@ -44,7 +45,10 @@ export default async function TeacherChatPage({
           <h2 className="mt-4 text-xl font-semibold text-zinc-950">{l(agent.name, locale)}</h2>
           <p className="mt-2 text-sm leading-6 text-zinc-600">{dictionary.education.chatSubtitle}</p>
         </Card>
-        <MockChat locale={locale} dictionary={dictionary} agentName={l(agent.name, locale)} />
+        <div className="grid gap-5">
+          <MockChat locale={locale} dictionary={dictionary} agentName={l(agent.name, locale)} />
+          <TeacherStudioClient locale={locale} agentName={l(agent.name, locale)} />
+        </div>
       </div>
     </PageSection>
   );

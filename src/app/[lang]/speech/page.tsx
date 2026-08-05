@@ -1,8 +1,9 @@
-import { Activity, Mic2, Wind } from "lucide-react";
+import { Wind } from "lucide-react";
 
-import { Badge, Button, Card, PageSection, ProgressBar, SafetyNote, SectionHeader } from "@/components/ui/primitives";
+import { SpeechPracticeClient } from "@/components/speech-practice-client";
+import { Card, PageSection, ProgressBar, SafetyNote, SectionHeader } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
-import { data, l } from "@/lib/mock-services";
+import { data } from "@/lib/mock-services";
 
 export default async function SpeechSupportPage({ params }: { params: Promise<{ lang: string }> }) {
   const { locale, dictionary } = await getRouteContext(params);
@@ -29,32 +30,8 @@ export default async function SpeechSupportPage({ params }: { params: Promise<{ 
           </div>
         </Card>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {data.speechExercises.map((exercise) => (
-            <Card key={exercise.id} as="article" className="border-[#b9d7d9] bg-[#f7fbfb]">
-              <div className="flex items-start gap-3">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#d2ecee] text-[#24565c]">
-                  {exercise.tone === "calm" ? <Wind className="h-5 w-5" /> : exercise.tone === "focus" ? <Mic2 className="h-5 w-5" /> : <Activity className="h-5 w-5" />}
-                </span>
-                <div>
-                  <h2 className="text-lg font-semibold text-[var(--foreground)]">{l(exercise.title, locale)}</h2>
-                  <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">{l(exercise.description, locale)}</p>
-                </div>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <Badge>
-                  {exercise.durationMinutes} {dictionary.common.minutes}
-                </Badge>
-                <Badge tone="calm">{dictionary.speech.tracker}</Badge>
-              </div>
-              <div className="mt-5">
-                <ProgressBar value={exercise.progress} />
-              </div>
-              <div className="mt-5">
-                <Button variant="secondary">{dictionary.speech.startExercise}</Button>
-              </div>
-            </Card>
-          ))}
+        <div>
+          <SpeechPracticeClient locale={locale} />
         </div>
       </div>
     </PageSection>

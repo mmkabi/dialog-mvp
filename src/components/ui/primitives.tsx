@@ -94,19 +94,22 @@ export function Button({
   type = "button",
   icon,
   onClick,
+  disabled = false,
 }: {
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost";
   type?: "button" | "submit";
   icon?: ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }) {
   return (
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0",
         variant === "primary" && "bg-[var(--primary)] text-white shadow-lg shadow-[rgb(104_25_36_/_20%)] hover:bg-[#7c2430]",
         variant === "secondary" && "border border-[var(--border-soft)] bg-[var(--surface-paper)] text-[var(--foreground)] hover:border-[var(--accent)] hover:text-[var(--primary)]",
         variant === "ghost" && "text-[var(--text-muted)] hover:bg-[var(--accent-soft)]/35 hover:text-[var(--primary)]",

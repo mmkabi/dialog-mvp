@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="420" viewBox="0 0 560 420" role="img" aria-labelledby="title desc">
+  <title id="title">Dialog temporary logo</title>
+  <desc id="desc">Three minimal human faces with a dialogue bubble, warm gold, and navy brand text.</desc>
+  <rect width="560" height="420" fill="none"/>
+  <g transform="translate(92 38)">
+    <path d="M74 36h132c40 0 72 32 72 72v42c0 40-32 72-72 72h-40l-42 44v-44H74c-40 0-72-32-72-72v-42c0-40 32-72 72-72Z" fill="#13243c"/>
+    <circle cx="93" cy="126" r="34" fill="#f8f4ea"/>
+    <path d="M59 126c16-28 52-28 68 0-8 21-60 21-68 0Z" fill="#13243c"/>
+    <circle cx="180" cy="126" r="35" fill="#f8f4ea"/>
+    <path d="M148 130c18 24 48 24 65 0-7 38-57 38-65 0Z" fill="#13243c"/>
+    <path d="M265 62c65 12 111 67 111 132 0 52-30 98-74 121l-46-74c31-10 54-39 54-73 0-37-27-68-62-75l17-31Z" fill="#c8962e"/>
+    <path d="M284 92c40 17 68 57 68 102 0 29-11 55-30 75" fill="none" stroke="#13243c" stroke-width="11" stroke-linecap="round"/>
+    <path d="M382 114c34 15 56 48 56 85M397 84c54 25 89 77 89 137" fill="none" stroke="#c8962e" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="67" cy="81" r="8" fill="#c8962e"/>
+    <circle cx="93" cy="72" r="8" fill="#c8962e"/>
+    <circle cx="119" cy="81" r="8" fill="#c8962e"/>
+  </g>
+  <text x="280" y="336" text-anchor="middle" font-family="Vazirmatn, Arial, sans-serif" font-size="54" font-weight="800" fill="#13243c">دیالوگ</text>
+  <g transform="translate(156 366)" fill="none" stroke="#c8962e" stroke-width="4" stroke-linecap="round">
+    <path d="M0 13h76"/>
+    <path d="M248 13h76"/>
+  </g>
+  <text x="280" y="386" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="5" fill="#c8962e">DIALOGUE</text>
+</svg>

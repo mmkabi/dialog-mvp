@@ -1,19 +1,22 @@
-import { ArrowRight, BookOpen, BriefcaseBusiness, HeartPulse, MessageCircle, Mic2, UsersRound } from "lucide-react";
+import { ArrowRight, Award, BookOpen, BriefcaseBusiness, HeartPulse, MessageCircle, Mic2, UsersRound, Wind } from "lucide-react";
 import Image from "next/image";
 
 import { Badge, ButtonLink, Card, PageSection, SectionHeader, TrustBadge } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
+import { featureCopy, t } from "@/lib/feature-content";
 
 export default async function LandingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { locale, dictionary } = await getRouteContext(params);
   const base = `/${locale}`;
   const modules = [
-    { href: `${base}/education`, label: dictionary.nav.education, icon: <BookOpen className="h-5 w-5" /> },
-    { href: `${base}/actors`, label: dictionary.nav.actors, icon: <UsersRound className="h-5 w-5" /> },
-    { href: `${base}/practice`, label: dictionary.nav.practice, icon: <MessageCircle className="h-5 w-5" /> },
-    { href: `${base}/casting`, label: dictionary.nav.casting, icon: <BriefcaseBusiness className="h-5 w-5" /> },
-    { href: `${base}/speech`, label: dictionary.nav.speech, icon: <Mic2 className="h-5 w-5" /> },
-    { href: `${base}/children`, label: dictionary.nav.children, icon: <HeartPulse className="h-5 w-5" /> },
+    { href: `${base}/education`, label: dictionary.nav.education, body: dictionary.education.subtitle, icon: <BookOpen className="h-6 w-6" /> },
+    { href: `${base}/actors`, label: dictionary.nav.actors, body: dictionary.actors.subtitle, icon: <UsersRound className="h-6 w-6" /> },
+    { href: `${base}/practice`, label: dictionary.nav.practice, body: dictionary.practice.subtitle, icon: <MessageCircle className="h-6 w-6" /> },
+    { href: `${base}/casting`, label: dictionary.nav.casting, body: dictionary.casting.subtitle, icon: <BriefcaseBusiness className="h-6 w-6" /> },
+    { href: `${base}/speech`, label: dictionary.nav.speech, body: dictionary.speech.subtitle, icon: <Mic2 className="h-6 w-6" /> },
+    { href: `${base}/speech`, label: t(featureCopy.warmupTitle, locale), body: t(featureCopy.warmupSubtitle, locale), icon: <Wind className="h-6 w-6" /> },
+    { href: `${base}/children`, label: dictionary.nav.children, body: dictionary.children.subtitle, icon: <HeartPulse className="h-6 w-6" /> },
+    { href: `${base}/certificates`, label: t(featureCopy.certificates, locale), body: t(featureCopy.certificatesSubtitle, locale), icon: <Award className="h-6 w-6" /> },
   ];
 
   return (
@@ -51,7 +54,7 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
                 <div className="mb-5 flex items-center justify-between gap-3">
                   <div>
                     <p className="text-sm font-semibold text-[var(--primary)]">{dictionary.brand.shortName}</p>
-                    <p className="mt-1 text-2xl font-semibold">{dictionary.landing.moduleTitle}</p>
+                    <p className="mt-1 text-2xl font-semibold">{t(featureCopy.landingMainPaths, locale)}</p>
                   </div>
                   <Badge tone="warm">{dictionary.nav.education}</Badge>
                 </div>
@@ -68,20 +71,21 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
       </section>
 
       <PageSection>
-        <SectionHeader title={dictionary.landing.moduleTitle} subtitle={dictionary.brand.tagline} />
+        <SectionHeader title={t(featureCopy.landingMainPaths, locale)} subtitle={dictionary.brand.tagline} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {modules.map((module) => (
-            <Card key={`${module.href}-${module.label}`} as="article" className="min-h-44">
+            <a
+              key={`${module.href}-${module.label}`}
+              href={module.href}
+              aria-label={`${t(featureCopy.openModule, locale)}: ${module.label}`}
+              className="spotlight-hover block min-h-56 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-raised)]/95 p-5 shadow-[var(--shadow-cinematic)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/45 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--background)]"
+            >
               <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-[var(--accent-soft)] text-[var(--primary)] shadow-inner">
                 {module.icon}
               </div>
-              <h2 className="text-lg font-semibold text-[var(--foreground)]">{module.label}</h2>
-              <div className="mt-4">
-                <ButtonLink href={module.href} variant="ghost">
-                  {dictionary.common.view}
-                </ButtonLink>
-              </div>
-            </Card>
+              <h2 className="text-2xl font-semibold leading-tight text-[var(--foreground)]">{module.label}</h2>
+              <p className="mt-3 line-clamp-3 text-sm leading-7 text-[var(--text-muted)]">{module.body}</p>
+            </a>
           ))}
         </div>
       </PageSection>

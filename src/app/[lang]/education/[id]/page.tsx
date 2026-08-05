@@ -11,6 +11,8 @@ import {
   SafetyNote,
   SectionHeader,
 } from "@/components/ui/primitives";
+import { EducationGamification } from "@/components/education-gamification";
+import { TeacherStudioClient } from "@/components/teacher-studio-client";
 import { getRouteContext } from "@/i18n/route-context";
 import { locales } from "@/i18n/config";
 import { data, getTeacherAgent, l } from "@/lib/mock-services";
@@ -52,6 +54,15 @@ export default async function TeacherAgentPage({
       <div className="mb-6 grid gap-3 md:grid-cols-2">
         <SafetyNote tone="warm">{dictionary.safety.teacherReconstruction}</SafetyNote>
         <SafetyNote tone="calm">{dictionary.safety.aiCanBeWrong}</SafetyNote>
+      </div>
+
+      <div className="mb-5">
+        <EducationGamification
+          locale={locale}
+          completed={completed}
+          total={agent.lessons.length}
+          xp={agent.lessons.reduce((sum, lesson) => sum + (lesson.state === "completed" ? lesson.xp : 0), 0)}
+        />
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[340px_1fr]">
@@ -127,6 +138,8 @@ export default async function TeacherAgentPage({
               ))}
             </div>
           </Card>
+
+          <TeacherStudioClient locale={locale} agentName={l(agent.name, locale)} />
         </div>
       </div>
     </PageSection>
