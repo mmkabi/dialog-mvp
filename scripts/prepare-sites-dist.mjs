@@ -17,8 +17,14 @@ function cloneRequestForPath(request, pathname) {
 }
 
 async function fetchAsset(env, request, pathname) {
-  const response = await env.ASSETS.fetch(cloneRequestForPath(request, pathname));
-  return response.status === 404 ? null : response;
+  const assetPaths = pathname.startsWith("/dist/") ? [pathname] : [pathname, "/dist" + pathname];
+
+  for (const assetPath of assetPaths) {
+    const response = await env.ASSETS.fetch(cloneRequestForPath(request, assetPath));
+    if (response.status !== 404) return response;
+  }
+
+  return null;
 }
 
 function withSecurityHeaders(response) {
