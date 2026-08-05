@@ -1,12 +1,12 @@
-import { HeartPulse, ImageIcon, Sparkles } from "lucide-react";
-
-import { Badge, Button, Card, PageSection, ProgressBar, SafetyNote, SectionHeader } from "@/components/ui/primitives";
+import { ChildPracticeCardsClient } from "@/components/child-practice-cards-client";
+import { ChildProgressOverviewClient } from "@/components/child-progress-overview-client";
+import { PageSection, SafetyNote, SectionHeader } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
-import { data, l } from "@/lib/mock-services";
+import { childPracticeCopy, childText } from "@/lib/child-practice-content";
+import { data } from "@/lib/mock-services";
 
 export default async function ChildrenPracticePage({ params }: { params: Promise<{ lang: string }> }) {
   const { locale, dictionary } = await getRouteContext(params);
-  const average = Math.round(data.childExercises.reduce((sum, item) => sum + item.progress, 0) / data.childExercises.length);
 
   return (
     <PageSection>
@@ -17,45 +17,23 @@ export default async function ChildrenPracticePage({ params }: { params: Promise
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
-        <Card as="aside" className="border-[var(--accent)]/25 bg-[#fff3d6]">
-          <div className="grid h-16 w-16 place-items-center rounded-2xl bg-[var(--accent-soft)] text-[#714909] reward-pulse">
-            <Sparkles className="h-6 w-6" aria-hidden="true" />
-          </div>
-          <h2 className="mt-5 text-xl font-semibold text-[var(--foreground)]">{dictionary.children.parentOnly}</h2>
-          <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">{dictionary.children.reward}</p>
-          <div className="mt-5">
-            <ProgressBar value={average} label={dictionary.children.progress} />
-          </div>
-        </Card>
+        <ChildProgressOverviewClient
+          locale={locale}
+          title={dictionary.children.parentOnly}
+          reward={dictionary.children.reward}
+          progressLabel={dictionary.children.progress}
+        />
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {data.childExercises.map((exercise) => (
-            <Card key={exercise.id} as="article" className="border-[var(--accent)]/25 bg-[#fff9e9]">
-              <div className="flex items-start gap-3">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[var(--accent-soft)] text-[#714909]">
-                  {exercise.id === "image-selection" ? <ImageIcon className="h-5 w-5" /> : <HeartPulse className="h-5 w-5" />}
-                </span>
-                <div>
-                  <h2 className="text-lg font-semibold text-[var(--foreground)]">{l(exercise.title, locale)}</h2>
-                  <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">{l(exercise.description, locale)}</p>
-                </div>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <Badge tone="warm">
-                  {dictionary.children.ageBand}: {exercise.ageBand}
-                </Badge>
-                <Badge tone="calm">{dictionary.children.parentOnly}</Badge>
-              </div>
-              <div className="mt-5">
-                <ProgressBar value={exercise.progress} label={dictionary.children.progress} />
-              </div>
-              <SafetyNote tone="warm">{l(exercise.parentNote, locale)}</SafetyNote>
-              <div className="mt-5">
-                <Button variant="secondary">{dictionary.children.startExercise}</Button>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <ChildPracticeCardsClient
+          locale={locale}
+          exercises={data.childExercises}
+          ageBandLabel={dictionary.children.ageBand}
+          parentOnlyLabel={dictionary.children.parentOnly}
+          startLabel={dictionary.children.startExercise}
+        />
+      </div>
+      <div className="mt-6">
+        <SafetyNote tone="calm">{childText(childPracticeCopy.parentSafety, locale)}</SafetyNote>
       </div>
     </PageSection>
   );
