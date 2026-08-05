@@ -13,7 +13,16 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
-import { getLesson, getTeacherAgent, l } from "@/lib/mock-services";
+import { locales } from "@/i18n/config";
+import { data, getLesson, getTeacherAgent, l } from "@/lib/mock-services";
+
+export function generateStaticParams() {
+  return locales.flatMap((lang) =>
+    data.teachers.flatMap((agent) =>
+      agent.lessons.map((lesson) => ({ lang, id: agent.id, lessonId: lesson.id })),
+    ),
+  );
+}
 
 export default async function LessonPage({
   params,

@@ -3,7 +3,12 @@ import { notFound } from "next/navigation";
 import { MockChat } from "@/components/mock-chat";
 import { AvatarMark, ButtonLink, Card, PageSection, SafetyNote, SectionHeader } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
-import { getTeacherAgent, l } from "@/lib/mock-services";
+import { locales } from "@/i18n/config";
+import { data, getTeacherAgent, l } from "@/lib/mock-services";
+
+export function generateStaticParams() {
+  return locales.flatMap((lang) => data.teachers.map((agent) => ({ lang, id: agent.id })));
+}
 
 export default async function TeacherChatPage({
   params,

@@ -3,7 +3,12 @@ import { notFound } from "next/navigation";
 import { MockActionButton } from "@/components/mock-action-button";
 import { Badge, ButtonLink, Card, InfoRow, PageSection, SafetyNote, SectionHeader } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
-import { getPracticeRequest, l } from "@/lib/mock-services";
+import { locales } from "@/i18n/config";
+import { data, getPracticeRequest, l } from "@/lib/mock-services";
+
+export function generateStaticParams() {
+  return locales.flatMap((lang) => data.practiceRequests.map((request) => ({ lang, id: request.id })));
+}
 
 export default async function PracticeRequestDetailPage({
   params,

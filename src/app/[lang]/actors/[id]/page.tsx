@@ -12,7 +12,12 @@ import {
   TrustBadge,
 } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
-import { getActor, l } from "@/lib/mock-services";
+import { locales } from "@/i18n/config";
+import { data, getActor, l } from "@/lib/mock-services";
+
+export function generateStaticParams() {
+  return locales.flatMap((lang) => data.actors.map((actor) => ({ lang, id: actor.id })));
+}
 
 export default async function ActorDetailPage({
   params,
