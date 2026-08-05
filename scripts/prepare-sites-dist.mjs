@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const outDir = path.join(root, "out");
 const distDir = path.join(root, "dist");
+const clientDir = path.join(distDir, "client");
 const serverDir = path.join(distDir, "server");
 
 const worker = `
@@ -17,7 +18,7 @@ function cloneRequestForPath(request, pathname) {
 }
 
 async function fetchAsset(env, request, pathname) {
-  const assetPaths = pathname.startsWith("/dist/") ? [pathname] : [pathname, "/dist" + pathname];
+  const assetPaths = pathname.startsWith("/client/") ? [pathname] : [pathname, "/client" + pathname];
 
   for (const assetPath of assetPaths) {
     const response = await env.ASSETS.fetch(cloneRequestForPath(request, assetPath));
@@ -73,6 +74,7 @@ export default {
 `.trimStart();
 
 await rm(distDir, { recursive: true, force: true });
-await cp(outDir, distDir, { recursive: true });
+await mkdir(clientDir, { recursive: true });
+await cp(outDir, clientDir, { recursive: true });
 await mkdir(serverDir, { recursive: true });
 await writeFile(path.join(serverDir, "index.js"), worker);
