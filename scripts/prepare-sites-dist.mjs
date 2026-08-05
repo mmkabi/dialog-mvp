@@ -45,25 +45,6 @@ export default {
     const pathname = decodeURI(url.pathname);
     const firstSegment = pathname.split("/")[1];
 
-    if (pathname === "/_sites-debug-assets") {
-      const probes = [
-        "/fa/index.html",
-        "/client/fa/index.html",
-        "/dist/fa/index.html",
-        "/dist/client/fa/index.html",
-        "/assets/fa/index.html",
-        "/public/fa/index.html",
-      ];
-      const results = [];
-
-      for (const probe of probes) {
-        const response = await env.ASSETS.fetch(cloneRequestForPath(request, probe));
-        results.push({ path: probe, status: response.status });
-      }
-
-      return Response.json(results);
-    }
-
     if (pathname === "/") {
       return Response.redirect(new URL("/" + DEFAULT_LOCALE + "/", url), 302);
     }
