@@ -48,24 +48,6 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
               </ButtonLink>
             </div>
           </div>
-          <div className="reveal-up hidden lg:block">
-            <div className="paper-grain rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface-paper)]/80 p-5 shadow-2xl shadow-[rgb(100_70_30_/_12%)] backdrop-blur">
-              <div className="rounded-[1.5rem] border border-[var(--accent)]/25 bg-[var(--surface-raised)] p-5">
-                <div className="mb-5 flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-semibold text-[var(--primary)]">{dictionary.brand.shortName}</p>
-                    <p className="mt-1 text-2xl font-semibold">{t(featureCopy.landingMainPaths, locale)}</p>
-                  </div>
-                  <Badge tone="warm">{dictionary.nav.education}</Badge>
-                </div>
-                <div className="mt-5 grid grid-cols-3 gap-3 text-center text-sm text-[var(--text-muted)]">
-                  <div className="rounded-2xl bg-[var(--surface-warm)] p-3">{dictionary.nav.casting}</div>
-                  <div className="rounded-2xl bg-[var(--surface-warm)] p-3">{dictionary.nav.practice}</div>
-                  <div className="rounded-2xl bg-[var(--surface-warm)] p-3">{dictionary.nav.education}</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[var(--background)]" />
       </section>
