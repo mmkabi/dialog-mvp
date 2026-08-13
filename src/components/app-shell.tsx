@@ -53,8 +53,8 @@ export function AppShell({
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-3">
             <Link href={base} className="flex min-w-0 items-center gap-3">
-              <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-inner shadow-white/60 ring-1 ring-[var(--accent)]/45">
-                <Image src="/brand/dialog-logo.svg" alt="" width={42} height={34} className="h-10 w-10 object-contain" />
+              <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[var(--accent)]/35">
+                <Image src="/brand/dialog-logo.jpg" alt="" width={56} height={56} className="h-full w-full object-cover" />
               </span>
               <span className="min-w-0">
                 <span className="block truncate text-base font-bold tracking-tight text-[var(--primary)]">{dictionary.brand.name}</span>
