@@ -1,13 +1,21 @@
-import { ArrowRight, Award, BookOpen, BriefcaseBusiness, HeartPulse, MessageCircle, Mic2, UsersRound, Wind } from "lucide-react";
+import { ArrowRight, Award, BookOpen, BriefcaseBusiness, CalendarCheck, HeartPulse, MessageCircle, Mic2, Send, Sparkles, Trophy, UsersRound, Wind } from "lucide-react";
 import Image from "next/image";
 
-import { Badge, ButtonLink, Card, PageSection, SectionHeader, TrustBadge } from "@/components/ui/primitives";
+import { AvatarMark, Badge, ButtonLink, Card, PageSection, SectionHeader, TrustBadge } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 import { featureCopy, t } from "@/lib/feature-content";
+import { data, l } from "@/lib/mock-services";
+import { navCopy, navText } from "@/lib/navigation";
 
 export default async function LandingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { locale, dictionary } = await getRouteContext(params);
   const base = `/${locale}`;
+  const quickActions = [
+    { href: `${base}/pro`, label: navText(navCopy.submitPerformance, locale), icon: <Send className="h-5 w-5" /> },
+    { href: `${base}/pro`, label: navText(navCopy.nextSession, locale), icon: <CalendarCheck className="h-5 w-5" /> },
+    { href: `${base}/pro`, label: navText(navCopy.myFeedback, locale), icon: <MessageCircle className="h-5 w-5" /> },
+    { href: `${base}/me`, label: navText(navCopy.achievements, locale), icon: <Trophy className="h-5 w-5" /> },
+  ];
   const modules = [
     { href: `${base}/education`, label: dictionary.nav.education, body: dictionary.education.subtitle, icon: <BookOpen className="h-6 w-6" /> },
     { href: `${base}/actors`, label: dictionary.nav.actors, body: dictionary.actors.subtitle, icon: <UsersRound className="h-6 w-6" /> },
@@ -21,6 +29,46 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
 
   return (
     <>
+      <section className="px-4 pb-6 pt-5 md:hidden">
+        <Card as="section" className="overflow-hidden border-[var(--accent)]/35 bg-[linear-gradient(135deg,#fffaf0,#fff0c9_54%,#f6ddaa)] p-5">
+          <Badge tone="warm">{navText(navCopy.proEyebrow, locale)}</Badge>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-[var(--foreground)]">{navText(navCopy.proTitle, locale)}</h1>
+          <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">{navText(navCopy.proSubtitle, locale)}</p>
+          <div className="mt-5">
+            <ButtonLink href={`${base}/pro`} icon={<Sparkles className="h-4 w-4" />}>
+              {navText(navCopy.proCta, locale)}
+            </ButtonLink>
+          </div>
+        </Card>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          {quickActions.map((action) => (
+            <a key={action.label} href={action.href} className="min-h-28 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-raised)] p-4 shadow-sm active:scale-[0.98]">
+              <span className="grid h-10 w-10 place-items-center rounded-2xl bg-[var(--accent-soft)] text-[var(--primary)]">{action.icon}</span>
+              <span className="mt-3 block text-sm font-bold leading-6 text-[var(--foreground)]">{action.label}</span>
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)]">{navText(navCopy.recommendedActors, locale)}</h2>
+          <a href={`${base}/actors`} className="text-sm font-semibold text-[var(--primary)]">{navText(navCopy.viewAll, locale)}</a>
+        </div>
+        <div className="-mx-4 mt-3 flex gap-3 overflow-x-auto px-4 pb-2">
+          {data.actors.slice(0, 5).map((actor) => {
+            const actorName = `${l(actor.firstName, locale)} ${l(actor.lastName, locale)}`;
+            return (
+              <a key={actor.id} href={`${base}/actors/${actor.id}`} className="w-28 shrink-0 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-raised)] p-3 text-center shadow-sm">
+                <AvatarMark label={actorName} tone={actor.photoTone} size="sm" />
+                <span className="mt-3 block truncate text-sm font-bold text-[var(--foreground)]">{actorName}</span>
+                <span className="mt-1 block truncate text-xs text-[var(--text-muted)]">{l(actor.city, locale)}</span>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+      <div className="hidden md:block">
       <section className="stage-vignette relative min-h-[86vh] overflow-hidden text-[var(--foreground)]">
         <Image
           src="/images/dialog-stage-hero-light.png"
@@ -82,6 +130,7 @@ export default async function LandingPage({ params }: { params: Promise<{ lang: 
           <p className="mt-4 leading-8 text-[var(--text-muted)]">{dictionary.landing.trustBody}</p>
         </Card>
       </PageSection>
+      </div>
     </>
   );
 }

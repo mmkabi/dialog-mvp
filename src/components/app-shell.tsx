@@ -1,27 +1,18 @@
 import {
-  BookOpen,
-  Award,
-  BriefcaseBusiness,
-  HeartPulse,
-  LayoutDashboard,
+  Bell,
   MessageCircle,
-  Mic2,
-  ShieldCheck,
   Sparkles,
-  UserRound,
-  UsersRound,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { ButtonLink, TrustBadge, cn } from "@/components/ui/primitives";
+import { DesktopMainNavigation, MobileBottomNavigation } from "@/components/main-navigation";
+import { ButtonLink, TrustBadge } from "@/components/ui/primitives";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/messages";
-import { featureCopy, t } from "@/lib/feature-content";
-
-const iconClass = "h-4 w-4";
+import { navCopy, navText } from "@/lib/navigation";
 
 export function AppShell({
   locale,
@@ -33,28 +24,16 @@ export function AppShell({
   children: ReactNode;
 }) {
   const base = `/${locale}`;
-  const navItems = [
-    { href: `${base}/dashboard`, label: dictionary.nav.dashboard, icon: <LayoutDashboard className={iconClass} /> },
-    { href: `${base}/profile`, label: dictionary.nav.profile, icon: <UserRound className={iconClass} /> },
-    { href: `${base}/actors`, label: dictionary.nav.actors, icon: <UsersRound className={iconClass} /> },
-    { href: `${base}/education`, label: dictionary.nav.education, icon: <BookOpen className={iconClass} /> },
-    { href: `${base}/practice`, label: dictionary.nav.practice, icon: <MessageCircle className={iconClass} /> },
-    { href: `${base}/casting`, label: dictionary.nav.casting, icon: <BriefcaseBusiness className={iconClass} /> },
-    { href: `${base}/speech`, label: dictionary.nav.speech, icon: <Mic2 className={iconClass} /> },
-    { href: `${base}/children`, label: dictionary.nav.children, icon: <HeartPulse className={iconClass} /> },
-    { href: `${base}/certificates`, label: t(featureCopy.certificates, locale), icon: <Award className={iconClass} /> },
-    { href: `${base}/admin`, label: dictionary.nav.admin, icon: <ShieldCheck className={iconClass} /> },
-  ];
 
   return (
     <div className="min-h-screen text-[var(--foreground)]">
       <header className="sticky top-0 z-30 border-b border-[#dec89f]/80 bg-[linear-gradient(135deg,rgba(255,250,240,0.96),rgba(248,237,220,0.94)_48%,rgba(246,221,170,0.78))] text-[var(--foreground)] shadow-[0_18px_50px_rgb(108_70_28_/_12%)] backdrop-blur-xl">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/70 to-transparent" aria-hidden="true" />
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 lg:px-8 max-md:hidden">
           <div className="flex items-center justify-between gap-3">
             <Link href={base} className="flex min-w-0 items-center gap-3">
-              <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-[var(--accent)]/35">
-                <Image src="/brand/dialog-logo.jpg" alt="" width={56} height={56} className="h-full w-full object-cover" />
+              <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-full shadow-sm ring-1 ring-[var(--accent)]/35">
+                <Image src="/brand/dialog-logo-circle.png" alt="" width={56} height={56} className="h-full w-full object-cover" />
               </span>
               <span className="min-w-0">
                 <span className="block truncate text-base font-bold tracking-tight text-[var(--primary)]">{dictionary.brand.name}</span>
@@ -68,25 +47,27 @@ export function AppShell({
               <LanguageSwitcher locale={locale} dictionary={dictionary} />
             </div>
           </div>
-          <nav aria-label={dictionary.nav.dashboard} className="overflow-x-auto">
-            <div className="flex min-w-max gap-2 rounded-full border border-white/55 bg-white/35 p-1 shadow-inner shadow-white/40">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "inline-flex min-h-10 items-center gap-2 rounded-full border border-transparent px-3.5 py-2 text-sm font-semibold text-[#6d5e4d] transition hover:border-[var(--accent)]/35 hover:bg-[var(--surface-paper)] hover:text-[var(--primary)] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]",
-                  )}
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
+          <DesktopMainNavigation locale={locale} />
+        </div>
+
+        <div className="mx-auto flex min-h-16 max-w-md items-center justify-between gap-3 px-4 py-2 md:hidden">
+          <Link href={base} className="flex min-w-0 items-center gap-2" aria-label={dictionary.brand.name}>
+            <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full shadow-sm ring-1 ring-[var(--accent)]/35">
+              <Image src="/brand/dialog-logo-circle.png" alt="" width={44} height={44} className="h-full w-full object-cover" />
+            </span>
+            <span className="min-w-0 truncate text-sm font-bold text-[var(--primary)]">{dictionary.brand.shortName}</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <button type="button" aria-label={navText(navCopy.notifications, locale)} className="grid h-10 w-10 place-items-center rounded-full border border-white/70 bg-white/55 text-[var(--primary)] shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]">
+              <Bell className="h-4 w-4" aria-hidden="true" />
+            </button>
+            <button type="button" aria-label={navText(navCopy.mobileMessages, locale)} className="grid h-10 w-10 place-items-center rounded-full border border-white/70 bg-white/55 text-[var(--primary)] shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]">
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </header>
-      <main className="relative">
+      <main className="relative pb-24 md:pb-0">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[var(--surface-paper)] to-transparent" aria-hidden="true" />
         <div className="relative">{children}</div>
       </main>
@@ -101,6 +82,7 @@ export function AppShell({
           </Link>
         </div>
       </footer>
+      <MobileBottomNavigation locale={locale} />
     </div>
   );
 }

@@ -12,10 +12,19 @@ import {
 } from "@/components/ui/primitives";
 import { getRouteContext } from "@/i18n/route-context";
 import { data, l } from "@/lib/mock-services";
+import { navCopy, navText } from "@/lib/navigation";
 
 export default async function EducationPage({ params }: { params: Promise<{ lang: string }> }) {
   const { locale, dictionary } = await getRouteContext(params);
   const base = `/${locale}/education`;
+  const sectionBase = `/${locale}`;
+  const mobileTabs = [
+    { href: `${sectionBase}/education`, label: locale === "fa" ? "بازیگری" : "Acting" },
+    { href: `${sectionBase}/speech`, label: navText(navCopy.speech, locale) },
+    { href: `${sectionBase}/children`, label: navText(navCopy.children, locale) },
+    { href: `${sectionBase}/practice`, label: locale === "fa" ? "تمرین‌ها" : "Practice" },
+    { href: `${sectionBase}/me`, label: navText(navCopy.courses, locale) },
+  ];
 
   return (
     <PageSection>
@@ -23,6 +32,13 @@ export default async function EducationPage({ params }: { params: Promise<{ lang
       <div className="mb-6 grid gap-3 md:grid-cols-2">
         <SafetyNote tone="warm">{dictionary.safety.teacherReconstruction}</SafetyNote>
         <SafetyNote tone="calm">{dictionary.safety.aiCanBeWrong}</SafetyNote>
+      </div>
+      <div className="mb-5 flex gap-2 overflow-x-auto pb-2 md:hidden">
+        {mobileTabs.map((tab) => (
+          <a key={tab.href} href={tab.href} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-[var(--border-soft)] bg-[var(--surface-paper)] px-4 text-sm font-bold text-[var(--primary)]">
+            {tab.label}
+          </a>
+        ))}
       </div>
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">

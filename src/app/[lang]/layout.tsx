@@ -10,6 +10,13 @@ import "../globals.css";
 export const metadata: Metadata = {
   title: "Dialog / دیالوگ",
   description: "A bilingual smart acting platform MVP for actors, coaches, directors, parents, and admins.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/brand/dialog-logo-circle.png", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/dialog-logo-circle.png", type: "image/png" }],
+  },
 };
 
 export function generateStaticParams() {
