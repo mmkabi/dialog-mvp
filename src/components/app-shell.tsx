@@ -9,6 +9,7 @@ import type { ReactNode } from "react";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { DesktopMainNavigation, MobileBottomNavigation } from "@/components/main-navigation";
+import { PwaManager } from "@/components/pwa-manager";
 import { ButtonLink, TrustBadge } from "@/components/ui/primitives";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/messages";
@@ -50,7 +51,7 @@ export function AppShell({
           <DesktopMainNavigation locale={locale} />
         </div>
 
-        <div className="mx-auto flex min-h-16 max-w-md items-center justify-between gap-3 px-4 py-2 md:hidden">
+        <div className="mx-auto flex min-h-16 max-w-md items-center justify-between gap-3 px-4 pb-2 pt-[calc(env(safe-area-inset-top)+0.5rem)] md:hidden">
           <Link href={base} className="flex min-w-0 items-center gap-2" aria-label={dictionary.brand.name}>
             <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full shadow-sm ring-1 ring-[var(--accent)]/35">
               <Image src="/brand/dialog-logo-circle.png" alt="" width={44} height={44} className="h-full w-full object-cover" />
@@ -67,7 +68,7 @@ export function AppShell({
           </div>
         </div>
       </header>
-      <main className="relative pb-24 md:pb-0">
+      <main className="relative pb-[calc(env(safe-area-inset-bottom)+6rem)] md:pb-0">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[var(--surface-paper)] to-transparent" aria-hidden="true" />
         <div className="relative">{children}</div>
       </main>
@@ -83,6 +84,7 @@ export function AppShell({
         </div>
       </footer>
       <MobileBottomNavigation locale={locale} />
+      <PwaManager locale={locale} />
     </div>
   );
 }

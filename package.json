@@ -8,7 +8,8 @@
     "build:sites": "node scripts/clean-sites-output.mjs && next build && node scripts/prepare-sites-dist.mjs",
     "start": "next start",
     "lint": "eslint",
-    "test:child": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/test-child-practice.mjs"
+    "test:child": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/test-child-practice.mjs",
+    "test:pwa": "node scripts/test-pwa.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.22.0",

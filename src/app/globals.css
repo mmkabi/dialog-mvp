@@ -33,6 +33,11 @@
   --font-mono: "Courier New", monospace;
 }
 
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
 body {
   background:
     radial-gradient(circle at 18% -10%, rgb(212 154 42 / 20%), transparent 34rem),
@@ -41,6 +46,9 @@ body {
   color: var(--foreground);
   font-family: "Manrope", "Inter", Arial, Helvetica, sans-serif;
   min-height: 100vh;
+  min-height: 100dvh;
+  padding-inline-start: env(safe-area-inset-left);
+  padding-inline-end: env(safe-area-inset-right);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;

@@ -1,0 +1,53 @@
+{
+  "name": "دیالوگ / Dialog",
+  "short_name": "دیالوگ",
+  "description": "یک پلتفرم هنری دو زبانه برای آموزش بازیگری، بانک بازیگران، فراخوان‌ها و تمرین گفتار.",
+  "start_url": "/fa/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#fff8ea",
+  "theme_color": "#681924",
+  "lang": "fa",
+  "dir": "rtl",
+  "orientation": "portrait-primary",
+  "categories": ["education", "entertainment", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "دیالوگ پرو",
+      "short_name": "پرو",
+      "url": "/fa/pro/",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "کشف هنرمندان",
+      "short_name": "کشف",
+      "url": "/fa/discover/",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}
